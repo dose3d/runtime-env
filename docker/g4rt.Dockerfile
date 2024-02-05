@@ -1,11 +1,11 @@
-# INFO: 
+# 
 # This is dockerfile to build an image for dose3d cross-project environment
-# -------------------------------------------------------------------------
-# INSTRUCTION:
-# Build image (from the directory containing dockerfile):
-# docker build --tag 'g4rt:1.0-dev' .
-# Run container:
-# docker run -ti --rm g4rt:1.0-dev /bin/bash
+# 
+# Build locally:
+# docker build --tag 'g4rt:v1r0' . -f docker/g4rt.Dockerfile
+#
+# RunInteractively and Remove it Once the Process is Complete
+# docker run -it --rm g4rt:v1r0 /bin/bash
 
 FROM brachwal/ubuntu-g4:22.04-11.1.3-1.0
 

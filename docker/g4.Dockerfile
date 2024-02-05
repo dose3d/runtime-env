@@ -1,8 +1,11 @@
-# HOW TO:
-# Build image (from the directory containing dockerfile):
-# docker build --tag 'ubuntu-g4:22.04-11.2' .
-# Run container:
-# docker run -ti --rm ubuntu-g4:22.04-11.2 /bin/bash
+#
+# DockerHub: brachwal/ubuntu-g4:22.04-11.1.3-1.0
+#
+# From scratch:
+# docker build --tag 'ubuntu-g4:22.04-11.2' . -f docker/g4.Dockerfile
+#
+# RunInteractively and Remove it Once the Process is Complete
+# docker run -it --rm ubuntu-g4:22.04-11.2 /bin/bash
 
 FROM ubuntu:22.04
 RUN echo 'APT::Install-Suggests "0";' >> /etc/apt/apt.conf.d/00-docker
@@ -11,6 +14,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
   apt-get update && \
   apt-get install -y gpg && \
   apt-get install -y cmake && \
+  apt-get install -y make && \
   apt-get install -y git && \
   apt-get install -y wget && \
   apt-get install -y curl && \
@@ -39,7 +43,8 @@ RUN . /opt/conda/etc/profile.d/conda.sh && \
     -DCMAKE_INSTALL_PREFIX=/opt/geant4 \
     -DGEANT4_USE_GDML=ON \
     -DGEANT4_INSTALL_EXAMPLES=OFF \
-    -DGEANT4_USE_HDF5=ON -DGEANT4_USE_SYSTEM_EXPAT=OFF ../
+    -DGEANT4_USE_HDF5=ON \
+    -DGEANT4_USE_SYSTEM_EXPAT=OFF ../
 
 RUN cd ~/geant4/build; make -j2
 RUN cd ~/geant4/build; make install
